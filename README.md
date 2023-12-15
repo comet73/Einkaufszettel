@@ -1,2 +1,2 @@
 # Einkaufszettel
-Webapplication manage a grocery shopping list.
+Webapplication to manage a grocery shopping list.
