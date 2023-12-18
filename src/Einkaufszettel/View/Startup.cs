@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.SpaServices.Extensions;
+using Einkaufszettel.Repository;
 
 namespace View
 {
@@ -25,6 +26,7 @@ namespace View
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddScoped<EinkaufContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

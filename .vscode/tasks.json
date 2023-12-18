@@ -3,6 +3,7 @@
     "tasks": [
         {
             "label": "build-View",
+            "dependsOn": ["pwd", "printenv", "webpack-vendor", "webpack"],
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -11,7 +12,10 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
-        }
+            "problemMatcher": "$msCompile",
+            "options": {
+                "cwd": "${workspaceFolder}/src/Einkaufszettel/View" // Hier wurde das Arbeitsverzeichnis festgelegt
+            }
+        },
     ]
 }
