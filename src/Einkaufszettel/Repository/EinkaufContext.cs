@@ -15,5 +15,13 @@ namespace Einkaufszettel.Repository
         {
             optionsBuilder.UseSqlite("sqlite:///Einkaufszettel.db");
         }
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder
+                .Properties<Ulid>()
+                .HaveConversion<UlidToStringConverter>()
+                .HaveConversion<UlidToBytesConverter>();
+        }
     }
 }

@@ -45,4 +45,10 @@ app.UseAuthorization();
 
 //app.MapRazorPages();
 
+using (app.Services.CreateScope())
+{
+    var context = app.Services.GetRequiredService<EinkaufContext>();
+    context.Database.EnsureCreated();
+}
+
 app.Run();
