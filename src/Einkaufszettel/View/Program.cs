@@ -1,25 +1,48 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Einkaufszettel.Repository;
 
-namespace View
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+//builder.Services.AddRazorPages();
+builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
+builder.Services.AddScoped<EinkaufContext>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    public class Program
+    app.UseDeveloperExceptionPage();
+    app.UseSpa(spa =>
     {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
-    }
+        spa.Options.SourcePath = "../View";
+    });
 }
+else
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        name: "default",
+        template: "{controller=Home}/{action=Index}/{id?}");
+
+    routes.MapSpaFallbackRoute(
+        name: "spa-fallback",
+        defaults: new { controller = "Home", action = "Index" });
+});
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+//app.MapRazorPages();
+
+app.Run();
