@@ -13,7 +13,7 @@ namespace Einkaufszettel.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("sqlite:///Einkaufszettel.db");
+            optionsBuilder.UseSqlite("Data Source=Einkaufszettel.db");
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
