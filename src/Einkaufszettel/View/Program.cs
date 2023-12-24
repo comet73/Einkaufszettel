@@ -1,4 +1,5 @@
 using Einkaufszettel.Repository;
+using Einkaufszettel.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,8 +48,14 @@ app.UseAuthorization();
 
 using (app.Services.CreateScope())
 {
+    Console.WriteLine("Creating database");
     var context = app.Services.GetRequiredService<EinkaufContext>();
     context.Database.EnsureCreated();
+    Console.WriteLine("Database created");
+    var produkt = new Produkt("Milch");
+    context.Produkte.Add(produkt);
+    context.SaveChanges();
+    Console.WriteLine("Produkt added");
 }
 
 app.Run();

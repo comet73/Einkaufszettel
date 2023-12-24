@@ -6,20 +6,19 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-View",
-            "program": "${workspaceFolder}/src/Einkaufszettel/View/bin/Debug/net8.0/View.dll",
+            "program": "${workspaceFolder}/View/bin/Debug/net8.0/View.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/Einkaufszettel/View",
+            "cwd": "${workspaceFolder}/View",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
-                "NODE_ENV": "development"
+                "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceFolder}/src/Einkaufszettel/View/Views"
+                "/Views": "${workspaceFolder}/View/Views"
             }
         }
     ]
