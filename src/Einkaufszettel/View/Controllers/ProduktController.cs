@@ -23,7 +23,7 @@ namespace Einkaufszettel.View.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Produkt> Get(int id)
+        public ActionResult<Produkt> Get(string id)
         {
             var produkt = _context.Produkte.Find(id);
 

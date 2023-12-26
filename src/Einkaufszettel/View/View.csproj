@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.32" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
 
@@ -45,7 +46,7 @@
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
-      <DistFiles Include="wwwroot\dist\**" />
+          <DistFiles Include="wwwroot\dist\**" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -56,7 +57,7 @@
 <Target Name="Build">
     <!-- Stellen Sie sicher, dass alle NuGet-Pakete wiederhergestellt sind -->
     <Exec Command="dotnet restore" />
-
+    
     <!-- Kompilieren Sie das Projekt -->
     <Exec Command="dotnet build --no-restore" />
 </Target>

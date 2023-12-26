@@ -1,18 +1,20 @@
 using Einkaufszettel.Repository;
 using Einkaufszettel.Domain;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //builder.Services.AddRazorPages();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
-builder.Services.AddScoped<EinkaufContext>();
+builder.Services.AddDbContext<EinkaufContext>(options => options.UseSqlite("Data Source=Einkaufszettel.db"));
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    Console.WriteLine("Development environment");
     app.UseDeveloperExceptionPage();
     app.UseSpa(spa =>
     {
@@ -46,16 +48,13 @@ app.UseAuthorization();
 
 //app.MapRazorPages();
 
-using (app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     Console.WriteLine("Creating database");
-    var context = app.Services.GetRequiredService<EinkaufContext>();
+    var context = scope.ServiceProvider.GetRequiredService<EinkaufContext>();
+    context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
     Console.WriteLine("Database created");
-    var produkt = new Produkt("Milch");
-    context.Produkte.Add(produkt);
-    context.SaveChanges();
-    Console.WriteLine("Produkt added");
 }
 
 app.Run();
